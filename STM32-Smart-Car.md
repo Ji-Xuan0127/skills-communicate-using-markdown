@@ -2,9 +2,9 @@
 
 ## 项目概述 (Project Overview)
 
-本项目旨在构建一个基于 **STM32C103F8** 微控制器的智能小车，该小车能够使用 **MPU6050** 六轴传感器模块实现自我修正前进方向的功能。通过实时读取陀螺仪和加速度计数据，小车可以保持直线行驶，即使在遇到外部干扰时也能自动调整方向。
+本项目旨在构建一个基于 **STM32F103C8** 微控制器的智能小车，该小车能够使用 **MPU6050** 六轴传感器模块实现自我修正前进方向的功能。通过实时读取陀螺仪和加速度计数据，小车可以保持直线行驶，即使在遇到外部干扰时也能自动调整方向。
 
-This project aims to build an intelligent small car based on the **STM32C103F8** microcontroller, which can use the **MPU6050** six-axis sensor module to self-correct its forward direction. By reading gyroscope and accelerometer data in real-time, the car can maintain straight-line driving and automatically adjust its direction even when encountering external disturbances.
+This project aims to build an intelligent small car based on the **STM32F103C8** microcontroller, which can use the **MPU6050** six-axis sensor module to self-correct its forward direction. By reading gyroscope and accelerometer data in real-time, the car can maintain straight-line driving and automatically adjust its direction even when encountering external disturbances.
 
 ---
 
