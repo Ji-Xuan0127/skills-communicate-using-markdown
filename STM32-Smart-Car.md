@@ -89,7 +89,8 @@ STM32F103C8T6          L298N Motor Driver
 // I2C handle
 I2C_HandleTypeDef hi2c1;
 
-// MPU6050 地址 (MPU6050 Address)
+// MPU6050 I2C 地址 (MPU6050 I2C Address)
+// 0xD0 是 8 位写地址 (0x68 << 1) - 0xD0 is 8-bit write address (0x68 << 1)
 #define MPU6050_ADDR 0xD0
 
 // 初始化 MPU6050 (Initialize MPU6050)
@@ -158,6 +159,9 @@ float PID_Calculate(PID_Controller *pid, float current_value, float dt) {
     
     // 积分项 (Integral term)
     pid->integral += error * dt;
+    // 积分限幅，防止积分饱和 (Integral clamping to prevent windup)
+    if (pid->integral > 100.0f) pid->integral = 100.0f;
+    if (pid->integral < -100.0f) pid->integral = -100.0f;
     float i_term = pid->Ki * pid->integral;
     
     // 微分项 (Derivative term)
@@ -173,7 +177,7 @@ float PID_Calculate(PID_Controller *pid, float current_value, float dt) {
 void Car_Direction_Control(void) {
     int16_t gyro_x, gyro_y, gyro_z;
     static float yaw_angle = 0.0f;
-    float dt = 0.01f; // 10ms 采样周期 (10ms sampling period)
+    const float dt = 0.01f; // 10ms 采样周期 (10ms sampling period)
     
     // 读取陀螺仪 Z 轴数据 (Read gyroscope Z-axis data)
     MPU6050_Read_Gyro(&gyro_x, &gyro_y, &gyro_z);
